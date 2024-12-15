@@ -30,12 +30,19 @@ This project is a web-based image masking and drawing application that uses **Fa
 The backend is built using **Express.js**. It provides the following functionality:
 
 1. **Image Upload API**: 
-   - Endpoint: `POST /api/upload`
+   - Endpoint: `POST /api/imageUpload`
    - Allows users to upload images to **Cloudinary**.
    - Returns the URL of the uploaded image.
 
 **Example Request**:
-```bash
+\```bash
 POST /api/upload
 Content-Type: multipart/form-data
 Body: { file: <image_file> }
+\```
+
+**Example Request**:
+```bash
+{
+  "url": "https://res.cloudinary.com/your-cloud-name/image/upload/v1641234567/image.png"
+}
