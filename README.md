@@ -22,6 +22,7 @@ This project is a web-based image masking and drawing application that uses **Fa
 
 - **Backend:**
   - **Express.js** - Server-side framework to handle requests.
+  - **MongoDb** - For storing Image Data
   - **Cloudinary** - For storing images in the cloud.
   - **Multer** - Middleware for handling image uploads.
 
@@ -98,6 +99,7 @@ To run this project locally, follow these steps:
 
     ```bash
     .envExample-
+    MONGO_URL=
     CLOUDINARY_CLOUD_NAME = 
     CLOUDINARY_API_KEY = 
     CLOUDINARY_API_SECRET = 
@@ -114,10 +116,11 @@ To run this project locally, follow these steps:
 
     ```bash
     cd frontend
-    npm start
+    npm run dev
     ```
 
-6. Open the browser and go to [http://localhost:5000](http://localhost:5000) to access the app.
+6. Open the browser and go to [http://localhost:5173](http://localhost:5000) to access the app.
+7. Backend is Started on [http://localhost:5000](http://localhost:5000).
 
 ---
 
