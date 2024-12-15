@@ -5,6 +5,7 @@ import { ImageMetadata } from "./image";
 import { Image } from "lucide-react";
 import FabricCanvas from "./components/FabricCanvas";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 function App() {
   const [imageData, setImageData] = useState<ImageMetadata | null>(null);
@@ -16,45 +17,34 @@ function App() {
   }, [imageData]);
 
   const onImageUpload = async(file: File) => {
-    // const url = URL.createObjectURL(file);
-    // const img = new window.Image();
+
     try {
       const formData = new FormData();
       formData.append("imageFile", file);
-  
-      const res = await axios.post("http://localhost:5000/api/imageUpload", formData, {
+      const toastId = toast.loading("Uploading image...");
+
+      const res = await axios.post("https://image-inpainting-tool.onrender.com/api/imageUpload", formData, {
         headers: {
           "Content-Type": "multipart/form-data", // Fix typo here (not "miltipart")
         },
       });
-  
+      
       console.log("Server Response:", res.data);
-  
+      
       setImageData({
         url: res.data.data.url,
         width: res.data.data.width,
         height: res.data.data.height,
+      });
+      toast.success("Image uploaded successfully in Database!", {
+        id: toastId,
       });
       setMaskUrl(null); // Reset mask URL
     } catch (error) {
       console.error("Error uploading image:", error);
     }// Reset mask URL when a new image is uploaded
 
-    // img.onload = () => {
-    //   setImageData({
-    //     url,
-    //     width: img.width,
-    //     height: img.height,
-    //   });
-    //   setMaskUrl(null); // Reset mask URL when a new image is uploaded
-    // };
-
-    // img.onerror = () => {
-    //   console.error("Failed to load the image");
-    //   URL.revokeObjectURL(url);
-    // };
-
-    // img.src = url;
+ 
   };
 
   const handleReUpload = (event: React.ChangeEvent<HTMLInputElement>) => {

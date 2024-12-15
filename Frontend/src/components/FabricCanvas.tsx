@@ -3,6 +3,7 @@ import { ImageMetadata } from '../image';
 import { useCanvas } from '../hooks/useCanvas';
 import { Minus, Plus, Trash2 } from 'lucide-react';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 
 
@@ -48,7 +49,8 @@ const FabricCanvas : React.FC<CanvasProps> = ({imageData, onMaskGenerated}) => {
           formData.append("imageFile", imageBlob, "mask.png");
       
           try {
-            const res = await axios.post("http://localhost:5000/api/imageUpload", formData, {
+            const toastId = toast.loading("Uploading masked Image...");
+            const res = await axios.post("https://image-inpainting-tool.onrender.com/api/imageUpload", formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },
@@ -56,7 +58,9 @@ const FabricCanvas : React.FC<CanvasProps> = ({imageData, onMaskGenerated}) => {
       
            
             setMaskImageUrl(res.data.data.url);
-        
+            toast.success("Masked Image uploaded successfully in Database!", {
+              id: toastId,
+            });
           } catch (error) {
             console.error("Error uploading image:", error);
           }
