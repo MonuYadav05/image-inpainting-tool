@@ -88,7 +88,7 @@ To run this project locally, follow these steps:
 
     ```bash
     cd Frontend
-    npm install
+    npm install --legacy-peer-deps
     ```
 
 3. **Setup Cloudinary**:
