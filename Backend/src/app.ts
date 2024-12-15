@@ -19,6 +19,11 @@ app.use(
       tempFileDir: "/tmp/",
     })
   );
+
+app.get("/" , (req:any, res:any) => {
+    res.send("hi there")
+})
+
 app.use("/api" , routes)
 
 export default app
